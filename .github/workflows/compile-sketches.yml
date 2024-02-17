@@ -27,6 +27,6 @@ jobs:
         with:
           cli-version: "latest"
           fqbn: "arduino:avr:nano"
-          sketch-paths: "- sketch"
+          sketch-paths: "sketch"
           github-token: ${{ secrets.GITHUB_TOKEN }}
           enable-warnings-report: true
