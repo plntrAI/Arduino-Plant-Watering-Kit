@@ -1,0 +1,5 @@
+{
+    "remote.autoForwardPortsSource": "hybrid",
+    "arduino.useArduinoCli": true,
+    "arduino.enableUSBDetection": true
+}
