@@ -18,7 +18,8 @@
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"vsciot-vscode.vscode-arduino"
+				"vsciot-vscode.vscode-arduino",
+				"ms-vscode.cpptools-extension-pack"
 			]
 		}
 	}
