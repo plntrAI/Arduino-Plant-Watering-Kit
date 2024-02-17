@@ -12,7 +12,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "uname -a",
+	"postCreateCommand": "curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh && echo 'export PATH=$PATH:/workspaces/Arduino-Plant-Watering-Kit/bin' >> ~/.bashrc && source ~/.bashrc",
 
 	// Configure tool-specific properties.
 	"customizations": {
