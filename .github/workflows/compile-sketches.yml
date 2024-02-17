@@ -1,0 +1,32 @@
+name: Compile Sketches
+
+on:
+  pull_request:
+    paths-ignore:
+      - "**"
+      - "!.github/workflows/compile-sketches.ya?ml"
+      - "!**.ino"
+
+  push:
+    paths-ignore:
+      - "**"
+      - "!.github/workflows/compile-sketches.ya?ml"
+      - "!**.ino"
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compile sketches
+        uses: arduino/compile-sketches@v1
+        with:
+          cli-version: "latest"
+          fqbn: "arduino:avr:nano"
+          sketch-paths: sketch
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          enable-warnings-report: true
