@@ -15,9 +15,14 @@ on:
 
 jobs:
   lint:
+    name: Lint
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: arduino/arduino-lint-action@v1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint sketches
+        uses: arduino/arduino-lint-action@v1
         with:
           path: sketch
