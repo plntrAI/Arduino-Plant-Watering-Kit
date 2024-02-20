@@ -4,13 +4,13 @@ on:
   pull_request:
     paths-ignore:
       - "**"
-      - "!.github/workflows/lint.ya?ml"
+      - "!.github/workflows/ci.ya?ml"
       - "!**.ino"
 
   push:
     paths-ignore:
       - "**"
-      - "!.github/workflows/lint.ya?ml"
+      - "!.github/workflows/ci.ya?ml"
       - "!**.ino"
 
 jobs:
