@@ -5,13 +5,13 @@ on:
     paths-ignore:
       - "**"
       - "!.github/workflows/lint.ya?ml"
-      - "!**.ino"
+      - "!**.cpp"
 
   push:
     paths-ignore:
       - "**"
       - "!.github/workflows/lint.ya?ml"
-      - "!**.ino"
+      - "!**.cpp"
 
 jobs:
   lint:
