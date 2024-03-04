@@ -1,19 +1,32 @@
-name: Compile Sketches
+name: CI
 
 on:
   pull_request:
     paths-ignore:
       - "**"
-      - "!.github/workflows/compile-sketches.ya?ml"
+      - "!.github/workflows/ci.ya?ml"
       - "!**.ino"
 
   push:
     paths-ignore:
       - "**"
-      - "!.github/workflows/compile-sketches.ya?ml"
+      - "!.github/workflows/ci.ya?ml"
       - "!**.ino"
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Lint sketches
+        uses: arduino/arduino-lint-action@v1
+        with:
+          path: sketch
+
   build:
     name: Build
     runs-on: ubuntu-latest
