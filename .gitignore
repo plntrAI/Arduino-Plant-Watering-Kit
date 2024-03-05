@@ -1,4 +1,5 @@
 bin
+.pio
 
 # Visual Studio Code
 .vscode/*
