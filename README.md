@@ -6,4 +6,4 @@
 
 > Build a smart garden setup with the Nano RP2040 Connect, a pump, and a moisture sensor.
 
-Decorating your home with plants is an easy way to bring some life into your day-to-day. The only problem is - those plants need water to survive, and if you forget to pay attention to them for a while you may need to start over. So instead of staying ever vigilant, why not spend an afternoon creating a setup that will let you both monitor the amount of moisture in your plants soil, and water your plants from afar using the [Arduino Cloud](https://docs.arduino.cc/cloud/iot-cloud)?
+IoT Smart Garden Setup with Nano RP2040 Connect to automatically monitor and water your plants from an app with offline support. View your dashboard for real-time monitoring of soil moisture and manually enable the water pump to water your plants. 
