@@ -40,3 +40,4 @@ jobs:
           enable-warnings-report: true
           libraries: |
             - name: ArduinoIoTCloud
+            - name: Arduino_JSON
