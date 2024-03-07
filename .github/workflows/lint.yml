@@ -6,18 +6,30 @@ on:
       - "**"
       - "!.github/workflows/lint.ya?ml"
       - "!**.ino"
+      - "!**.cpp"
+      - "!**.h"
 
   push:
     paths-ignore:
       - "**"
       - "!.github/workflows/lint.ya?ml"
       - "!**.ino"
+      - "!**.cpp"
+      - "!**.h"
 
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Rename .cpp to .ino
+        run: |
+          for file in $(find . -name "*.cpp"); do
+            mv "$file" "${file%.cpp}.ino"
+          done
+
       - uses: arduino/arduino-lint-action@v1
         with:
-          path: sketch
+          path: src/Plant_Watering_Kit_mar06a
