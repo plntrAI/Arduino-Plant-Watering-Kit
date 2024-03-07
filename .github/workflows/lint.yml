@@ -30,4 +30,4 @@ jobs:
 
       - uses: arduino/arduino-lint-action@v1
         with:
-          path: src/*.ino
+          path: src/Plant_Watering_Kit_mar06a.ino
