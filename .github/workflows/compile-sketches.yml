@@ -45,4 +45,5 @@ jobs:
             - name: WiFiNINA
             - name: Arduino_JSON
             - name: Arduino_SecureElement
+            - name: Bounce2
             - source-url: https://github.com/adafruit/Adafruit_SleepyDog.git
