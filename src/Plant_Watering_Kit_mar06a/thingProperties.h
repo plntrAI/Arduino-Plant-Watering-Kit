@@ -3,22 +3,22 @@
 #include <ArduinoIoTCloud.h>
 #include <Arduino_ConnectionHandler.h>
 
-const char SSID[]     = SECRET_SSID;    // Network SSID (name)
-const char PASS[]     = SECRET_OPTIONAL_PASS;    // Network password (use for WPA, or use as key for WEP)
+// const char SSID[] = SECRET_SSID;          // Network SSID (name)
+// const char PASS[] = SECRET_OPTIONAL_PASS; // Network password (use for WPA, or use as key for WEP)
 
-void onWaterTimeChange();n
+void onWaterTimeChange();
 void onWateringChange();
 
 int moisture;
 int waterTime;
 bool watering;
 
-void initProperties(){
+void initProperties()
+{
 
     ArduinoCloud.addProperty(moisture, READ, ON_CHANGE, NULL);
     ArduinoCloud.addProperty(waterTime, READWRITE, ON_CHANGE, onWaterTimeChange);
     ArduinoCloud.addProperty(watering, READWRITE, ON_CHANGE, onWateringChange);
-
 }
 
-WiFiConnectionHandler ArduinoIoTPreferredConnection(SSID, PASS);
+// WiFiConnectionHandler ArduinoIoTPreferredConnection(SSID, PASS);

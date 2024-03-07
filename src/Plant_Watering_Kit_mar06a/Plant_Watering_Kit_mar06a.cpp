@@ -1,9 +1,8 @@
 /* ------------- START CONFIG ------------- */
 constexpr int BUTTON_PIN = 4;
-constexpr int LED_PIN    = 13;
-constexpr int RELAY_PIN  = 13;
-constexpr int MOIST_PIN  = A0;
-
+constexpr int LED_PIN = 13;
+constexpr int RELAY_PIN = 13;
+constexpr int MOIST_PIN = A0;
 
 int raw_moisture = 0;
 /* ------------- END CONFIG ------------- */
@@ -14,11 +13,12 @@ int raw_moisture = 0;
 Bounce b;
 unsigned long startedWatering;
 
-void setup() {
+void setup()
+{
     Serial.begin(9600);
     delay(1500);
 
-    b.attach(BUTTON_PIN,INPUT_PULLUP);
+    b.attach(BUTTON_PIN, INPUT_PULLUP);
     b.interval(25);
     pinMode(LED_PIN, OUTPUT);
     pinMode(RELAY_PIN, OUTPUT);
@@ -33,16 +33,17 @@ void setup() {
     ArduinoCloud.printDebugInfo();
 
     // Blink LED to confirm we're up and running
-    for (int i = 0; i<=4; i++) {
+    for (int i = 0; i <= 4; i++)
+    {
         digitalWrite(LED_PIN, HIGH);
         delay(200);
         digitalWrite(LED_PIN, LOW);
         delay(200);
     }
-
 }
 
-void loop() {
+void loop()
+{
     ArduinoCloud.update();
 
     // Read the sensor and convert its value to a percentage
@@ -52,30 +53,42 @@ void loop() {
     Serial.println(moisture);
 
     // Set the LED behavior according to the moisture percentage or watering status
-    if (watering) {
+    if (watering)
+    {
         digitalWrite(LED_PIN, HIGH);
-    } else if (moisture > 40) {
+    }
+    else if (moisture > 40)
+    {
         // good, LED is turned off
         digitalWrite(LED_PIN, LOW);
-    } else if (moisture > 10) {
+    }
+    else if (moisture > 10)
+    {
         // warning, slow blink
-        digitalWrite(LED_PIN, (millis()%1000)<500);
-    } else {
+        digitalWrite(LED_PIN, (millis() % 1000) < 500);
+    }
+    else
+    {
         // need water, fast blink
-        digitalWrite(LED_PIN, (millis()%500)<250);
+        digitalWrite(LED_PIN, (millis() % 500) < 250);
     }
 
     // Stop watering after the configured duration
-    if (watering && (millis() - startedWatering) >= waterTime*1000) {
+    if (watering && (millis() - startedWatering) >= waterTime * 1000)
+    {
         stopWatering();
     }
 
     // Read button status
     b.update();
-    if (b.changed() && b.read() == false) { // button pressed
-        if (watering) {
+    if (b.changed() && b.read() == false)
+    { // button pressed
+        if (watering)
+        {
             stopWatering();
-        } else {
+        }
+        else
+        {
             startWatering();
         }
     }
@@ -84,26 +97,32 @@ void loop() {
 // This function is triggered whenever the server sends a change event,
 // which means that someone changed a value remotely and we need to do
 // something.
-void onWateringChange() {
-    if (watering) {
+void onWateringChange()
+{
+    if (watering)
+    {
         startWatering();
-    } else {
+    }
+    else
+    {
         stopWatering();
     }
 }
 
-
-void startWatering () {
+void startWatering()
+{
     watering = true;
     startedWatering = millis();
     digitalWrite(RELAY_PIN, HIGH);
 }
 
-void stopWatering () {
+void stopWatering()
+{
     watering = false;
     digitalWrite(RELAY_PIN, LOW);
 }
 
-void onWaterTimeChange()  {
+void onWaterTimeChange()
+{
     // Add your code here to act upon WaterTime change
 }
