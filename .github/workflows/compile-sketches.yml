@@ -44,4 +44,5 @@ jobs:
             - name: RTCZero
             - name: WiFiNINA
             - name: Arduino_JSON
+            - name: Arduino_SecureElement
             - source-url: https://github.com/adafruit/Adafruit_SleepyDog.git
