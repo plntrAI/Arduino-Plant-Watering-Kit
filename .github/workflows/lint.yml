@@ -30,4 +30,4 @@ jobs:
 
       - uses: arduino/arduino-lint-action@v1
         with:
-          path: src
+          path: src/*.ino
