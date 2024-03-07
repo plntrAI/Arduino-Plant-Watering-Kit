@@ -34,10 +34,14 @@ jobs:
         uses: arduino/compile-sketches@v1
         with:
           cli-version: "latest"
-          fqbn: "arduino:avr:nano"
+          fqbn: arduino:mbed_nano:nanorp2040connect
           sketch-paths: src/Plant_Watering_Kit_mar06a
           github-token: ${{ secrets.GITHUB_TOKEN }}
           enable-warnings-report: true
           libraries: |
             - name: ArduinoIoTCloud
+            - name: ArduinoECCX08
+            - name: RTCZero
+            - name: WiFiNINA
             - name: Arduino_JSON
+            - source-url: https://github.com/adafruit/Adafruit_SleepyDog.git
