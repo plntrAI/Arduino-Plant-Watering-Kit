@@ -24,6 +24,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Rename .cpp to .ino
+        run: |
+          for file in $(find . -name "*.cpp"); do
+            mv "$file" "${file%.cpp}.ino"
+          done
+
       - name: Compile sketches
         uses: arduino/compile-sketches@v1
         with:
