@@ -6,12 +6,14 @@ on:
       - "**"
       - "!.github/workflows/compile-sketches.ya?ml"
       - "!**.ino"
+      - "!**.cpp"
 
   push:
     paths-ignore:
       - "**"
       - "!.github/workflows/compile-sketches.ya?ml"
       - "!**.ino"
+      - "!**.cpp"
 
 jobs:
   build:
@@ -21,6 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Rename .cpp to .ino
+        run: |
+          for file in $(find . -name "*.cpp"); do
+            mv "$file" "${file%.cpp}.ino"
+          done
 
       - name: Compile sketches
         uses: arduino/compile-sketches@v1
