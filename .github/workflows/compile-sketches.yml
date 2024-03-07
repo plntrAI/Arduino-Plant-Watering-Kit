@@ -38,3 +38,5 @@ jobs:
           sketch-paths: src/Plant_Watering_Kit_mar06a
           github-token: ${{ secrets.GITHUB_TOKEN }}
           enable-warnings-report: true
+          libraries: |
+            - name: ArduinoIoTCloud
