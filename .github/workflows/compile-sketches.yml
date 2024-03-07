@@ -7,6 +7,7 @@ on:
       - "!.github/workflows/compile-sketches.ya?ml"
       - "!**.ino"
       - "!**.cpp"
+      - "!**.h"
 
   push:
     paths-ignore:
@@ -14,6 +15,7 @@ on:
       - "!.github/workflows/compile-sketches.ya?ml"
       - "!**.ino"
       - "!**.cpp"
+      - "!**.h"
 
 jobs:
   build:
