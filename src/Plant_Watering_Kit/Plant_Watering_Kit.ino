@@ -55,21 +55,25 @@ void loop()
     moisture = map(raw_moisture, 610, 90, 0, 100);
     Serial.println(moisture);
 
-    // Set the LED behavior according to the moisture percentage
-    if (moisture < 40)
+    // Set the LED behavior according to the moisture percentage or watering status
+    if (watering)
+    {
+        digitalWrite(LEDR, HIGH);
+    }
+    else if (moisture > 40)
+    {
+        // good, LED is turned off
+        digitalWrite(LEDR, LOW);
+    }
+    else if (moisture > 10)
     {
         // warning, slow blink
         digitalWrite(LEDR, (millis() % 1000) < 500);
     }
-    else if (moisture < 10)
-    {
-        // danger, fast blink
-        digitalWrite(LEDR, (millis() % 1000) < 250);
-    }
     else
     {
-        // good, LED is turned off
-        digitalWrite(LEDR, LOW);
+        // need water, fast blink
+        digitalWrite(LEDR, (millis() % 500) < 250);
     }
 
     // Stop watering after the configured duration
@@ -113,12 +117,15 @@ void startWatering()
     watering = true;
     startedWatering = millis();
     digitalWrite(RELAY_PIN, LOW);
-    digitalWrite(LED_BUILTIN, LOW);
 }
 
 void stopWatering()
 {
     watering = false;
     digitalWrite(RELAY_PIN, HIGH);
-    digitalWrite(LED_BUILTIN, HIGH);
+}
+
+void onWaterTimeChange()
+{
+    // Add your code here to act upon WaterTime change
 }
