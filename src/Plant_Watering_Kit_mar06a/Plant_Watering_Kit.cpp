@@ -1,7 +1,7 @@
 /* ------------- START CONFIG ------------- */
 constexpr int BUTTON_PIN = 4;
 constexpr int LED_PIN = 5;
-constexpr int RELAY_PIN = 6;
+constexpr int RELAY_PIN = 13;
 constexpr int MOIST_PIN = A0;
 
 int raw_moisture = 0;
