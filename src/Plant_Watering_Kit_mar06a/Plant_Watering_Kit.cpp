@@ -20,8 +20,11 @@ void setup()
 
     b.attach(BUTTON_PIN, INPUT_PULLUP);
     b.interval(25);
-    pinMode(LED_PIN, OUTPUT);
+    pinMode(LED_BUILTIN, OUTPUT);
     pinMode(RELAY_PIN, OUTPUT);
+    pinMode(LEDR, OUTPUT);
+    pinMode(LEDG, OUTPUT);
+    pinMode(LEDB, OUTPUT);
 
     // Make sure the pump is not running
     stopWatering();
@@ -35,9 +38,9 @@ void setup()
     // Blink LED to confirm we're up and running
     for (int i = 0; i <= 4; i++)
     {
-        digitalWrite(LED_PIN, HIGH);
+        digitalWrite(LEDG, HIGH);
         delay(200);
-        digitalWrite(LED_PIN, LOW);
+        digitalWrite(LEDG, LOW);
         delay(200);
     }
 }
@@ -52,25 +55,21 @@ void loop()
     moisture = map(raw_moisture, 610, 90, 0, 100);
     Serial.println(moisture);
 
-    // Set the LED behavior according to the moisture percentage or watering status
-    if (watering)
-    {
-        digitalWrite(LED_PIN, HIGH);
-    }
-    else if (moisture > 40)
-    {
-        // good, LED is turned off
-        digitalWrite(LED_PIN, LOW);
-    }
-    else if (moisture > 10)
+    // Set the LED behavior according to the moisture percentage
+    if (moisture < 40)
     {
         // warning, slow blink
-        digitalWrite(LED_PIN, (millis() % 1000) < 500);
+        digitalWrite(LEDR, (millis() % 1000) < 500);
+    }
+    else if (moisture < 10)
+    {
+        // danger, fast blink
+        digitalWrite(LEDR, (millis() % 1000) < 250);
     }
     else
     {
-        // need water, fast blink
-        digitalWrite(LED_PIN, (millis() % 500) < 250);
+        // good, LED is turned off
+        digitalWrite(LEDR, LOW);
     }
 
     // Stop watering after the configured duration
@@ -113,16 +112,13 @@ void startWatering()
 {
     watering = true;
     startedWatering = millis();
-    digitalWrite(RELAY_PIN, HIGH);
+    digitalWrite(RELAY_PIN, LOW);
+    digitalWrite(LED_BUILTIN, LOW);
 }
 
 void stopWatering()
 {
     watering = false;
-    digitalWrite(RELAY_PIN, LOW);
-}
-
-void onWaterTimeChange()
-{
-    // Add your code here to act upon WaterTime change
+    digitalWrite(RELAY_PIN, HIGH);
+    digitalWrite(LED_BUILTIN, HIGH);
 }
