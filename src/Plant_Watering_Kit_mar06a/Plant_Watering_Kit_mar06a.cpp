@@ -1,7 +1,7 @@
 /* ------------- START CONFIG ------------- */
 constexpr int BUTTON_PIN = 4;
-constexpr int LED_PIN = 13;
-constexpr int RELAY_PIN = 13;
+constexpr int LED_PIN = 5;
+constexpr int RELAY_PIN = 6;
 constexpr int MOIST_PIN = A0;
 
 int raw_moisture = 0;
@@ -26,7 +26,7 @@ void setup()
     // Make sure the pump is not running
     stopWatering();
 
-    // Connect to Arduino IoT Cloud
+    // Connect to Arduino Cloud
     initProperties();
     ArduinoCloud.begin(ArduinoIoTPreferredConnection);
     setDebugMessageLevel(4);
@@ -49,7 +49,7 @@ void loop()
     // Read the sensor and convert its value to a percentage
     // (0% = dry; 100% = wet)
     raw_moisture = analogRead(MOIST_PIN);
-    moisture = map(raw_moisture, 793, 382, 0, 100);
+    moisture = map(raw_moisture, 610, 90, 0, 100);
     Serial.println(moisture);
 
     // Set the LED behavior according to the moisture percentage or watering status
