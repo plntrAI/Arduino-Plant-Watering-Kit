@@ -51,7 +51,7 @@ void loop()
     // Read the sensor and convert its value to a percentage
     // (0% = dry; 100% = wet)
     raw_moisture = analogRead(MOIST_PIN);
-    moisture = map(raw_moisture, 610, 90, 0, 100);
+    moisture = map(raw_moisture, 793, 382, 0, 100);
     Serial.println(moisture);
 
     // Set the LED behavior according to the moisture percentage or watering status
