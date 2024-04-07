@@ -1,6 +1,6 @@
 /* ------------- START CONFIG ------------- */
 constexpr int BUTTON_PIN = 4;
-constexpr int RELAY_PIN = 13;
+constexpr int RELAY_PIN = 6;
 constexpr int MOIST_PIN = A0;
 
 int raw_moisture = 0;
@@ -55,24 +55,21 @@ void loop()
     Serial.println(moisture);
 
     // Set the LED behavior according to the moisture percentage or watering status
-    if (watering)
-    {
-        digitalWrite(LEDR, HIGH);
-    }
-    else if (moisture > 40)
-    {
-        // good, LED is turned off
-        digitalWrite(LEDR, LOW);
-    }
-    else if (moisture > 10)
+    if (moisture < 40)
     {
         // warning, slow blink
-        digitalWrite(LEDR, (millis() % 1000) < 500);
+        // digitalWrite(LEDR, (millis() % 1000) < 500);
+    }
+    else if (moisture < 10)
+    {
+
+        // need water, fast blink
+        // digitalWrite(LEDR, (millis() % 500) < 250);
     }
     else
     {
-        // need water, fast blink
-        digitalWrite(LEDR, (millis() % 500) < 250);
+        // good, LED is turned off
+        digitalWrite(LEDR, LOW);
     }
 
     // Stop watering after the configured duration
@@ -116,15 +113,12 @@ void startWatering()
     watering = true;
     startedWatering = millis();
     digitalWrite(RELAY_PIN, LOW);
+    digitalWrite(LED_BUILTIN, LOW);
 }
 
 void stopWatering()
 {
     watering = false;
     digitalWrite(RELAY_PIN, HIGH);
-}
-
-void onWaterTimeChange()
-{
-    // Add your code here to act upon WaterTime change
+    digitalWrite(LED_BUILTIN, HIGH);
 }
