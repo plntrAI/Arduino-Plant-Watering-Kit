@@ -14,7 +14,6 @@ unsigned long startedWatering;
 
 void setup()
 {
-    Serial.begin(9600);
     delay(1500);
 
     b.attach(BUTTON_PIN, INPUT_PULLUP);
@@ -52,7 +51,6 @@ void loop()
     // (0% = dry; 100% = wet)
     raw_moisture = analogRead(MOIST_PIN);
     moisture = map(raw_moisture, 793, 382, 0, 100);
-    Serial.println(moisture);
 
     // Set the LED behavior according to the moisture percentage or watering status
     if (moisture < 10)
